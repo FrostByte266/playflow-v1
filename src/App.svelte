@@ -1,8 +1,8 @@
-<script>
+<script type="ts">
 	import { EasyrouteProvider, RouterOutlet, RouterLink } from 'svelte-easyroute'
 	import router from "./router/router";
 
-	export let name;
+	export let name: string;
 </script>
 
 <EasyrouteProvider {router}>

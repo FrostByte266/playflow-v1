@@ -8,13 +8,14 @@
     "start:ssr": "ts-node ./server.ssr.ts"
   },
   "devDependencies": {
-    "@svitejs/vite-plugin-svelte": "^0.11.1",
+    "@sveltejs/vite-plugin-svelte": "1.0.0-next.47",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.39",
     "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "nodemon": "^2.0.16",
     "svelte": "^3.35.0",
+    "svelte-preprocess": "^4.10.7",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3",
     "vite": "^2.1.0"
