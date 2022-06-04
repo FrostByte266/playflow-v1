@@ -1,17 +1,18 @@
-const express = require('express')
+import express from 'express'
 const app = express()
-const fs = require('fs')
+import { readFileSync } from 'fs'
 
 // Import app built for SSR
-const { default: App } = require('./dist/server/App.ssr')
+import { default as App } from './dist/server/App.ssr'
 
 // Create Svelte Easyroute renderer
 const renderer = require('svelte-easyroute/ssr')()
 
 // Read template file
-const template = fs.readFileSync(__dirname + '/dist/index.html', 'utf8')
+const template = readFileSync(__dirname + '/dist/index.html', 'utf8')
 
 app.use('/assets', express.static(__dirname + '/dist/assets'))
+app.use('/favicon.ico', express.static(__dirname + '/public/favicon.ico'))
 
 app.get('*', async (req, res) => {
     // Pass any props to component here
