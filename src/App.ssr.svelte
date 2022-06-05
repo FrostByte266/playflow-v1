@@ -13,7 +13,7 @@
 
 <EasyrouteProvider {router}>
 	<main>
-		<h1 class="text-3xl text-green-900">Hello {name}!</h1>
+		<h1 class="text-3xl text-blue-500">Hello {name}!</h1>
 		<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 		<p>This is demo project for Svelte Easyroute SSR. See the source code of this page :)</p>
 		<RouterLink to="/">Page one</RouterLink>

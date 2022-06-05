@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build -c vite.config.ts --target esnext && vite build --ssr ./src/App.ssr.svelte -c vite.config.ssr.ts --target es2018",
     "start": "vite preview",
-    "start:ssr": "ts-node ./server.ssr.ts"
+    "start:ssr": "nodemon -e \".ts,.svelte\" -i dist --watch src --exec \"pnpm build && ts-node ./server.ssr.ts\""
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "1.0.0-next.47",
