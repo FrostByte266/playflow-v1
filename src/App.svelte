@@ -2,12 +2,15 @@
 	import { EasyrouteProvider, RouterOutlet, RouterLink } from 'svelte-easyroute'
 	import router from "./router/router";
 
+	import style from './tailwind.css'
+	console.log(style)
+
 	export let name: string;
 </script>
 
 <EasyrouteProvider {router}>
 	<main>
-		<h1>Hello {name}!</h1>
+		<h1 class="text-3xl text-sky-500">Hello {name}!</h1>
 		<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 		<p>This is demo project for <a href="https://github.com/lyohaplotinka/svelte-easyroute">Svelte Easyroute</a>
 			SSR. See the source code of this page :)</p>
@@ -16,25 +19,3 @@
 		<RouterOutlet />
 	</main>
 </EasyrouteProvider>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
