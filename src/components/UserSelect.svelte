@@ -1,9 +1,9 @@
 <script lang="ts">
-    import UserInfo from './UserInfo.svelte'
+    import EmployeeInfo from './EmployeeInfo.svelte'
 
     import type { IEmployee } from '../types/employee'
     const storeNumber = 795
-    const users: Array<IEmployee> = [
+    const employees: Array<IEmployee> = [
         {
             ID: 445324,
             name: "John Doe"
@@ -24,8 +24,8 @@
         <div class="p-5 flex flex-col align-center items-center bg-gray-400 rounded-lg">
             <h1 class="text-3xl">Welcome #{storeNumber}. Please select a user</h1>
             <div class="w-full p-5 gap-5 flex justify-around items-center">
-                {#each users as user (user.ID)}
-                    <UserInfo {...user} />
+                {#each employees as employee (employee.ID)}
+                    <EmployeeInfo {employee} />
                 {/each}
             </div>
         </div>
