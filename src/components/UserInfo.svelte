@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let employeeID: number
-    export let employeeName: string
+    export let ID: number
+    export let name: string
 </script>
 
 <div class="w-full h-full flex flex-col">
@@ -9,6 +9,6 @@
             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
           </svg>
     </div>
-    <h1 class="text-xl">{String(employeeID).padStart(9,'0')}</h1>
-    <h1 class="text-lg">{employeeName}</h1>
+    <h1 class="text-xl">{String(ID).padStart(9,'0')}</h1>
+    <h1 class="text-lg">{name}</h1>
 </div>
