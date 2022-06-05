@@ -5,17 +5,12 @@
  */
 
 import Router from 'svelte-easyroute'
-import PageOne from '../components/PageOne.svelte'
-import PageTwo from '../components/PageTwo.svelte'
+import UserSelect from '../components/UserSelect.svelte'
 
 const routes = [
     {
-        path: '/',
-        component: PageOne
-    },
-    {
-        path: '/page-two',
-        component: PageTwo
+        path: '/login',
+        component: UserSelect
     }
 ]
 
