@@ -6,7 +6,10 @@ import preprocess from 'svelte-preprocess'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svelte({
-    preprocess: preprocess({postcss: true}), 
+    preprocess: preprocess({postcss: true}),
+    compilerOptions: {
+      hydratable: true
+    }
   })],
   build: {
     outDir: './dist/server'

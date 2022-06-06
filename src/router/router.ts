@@ -6,11 +6,16 @@
 
 import Router from 'svelte-easyroute'
 import UserSelect from '../components/UserSelect.svelte'
+import PinEntry from '../components/PinEntry.svelte'
 
 const routes = [
     {
         path: '/login',
         component: UserSelect
+    },
+    {
+        path: '/pin',
+        component: PinEntry
     }
 ]
 

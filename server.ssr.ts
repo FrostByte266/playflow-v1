@@ -21,6 +21,7 @@ app.get('*', async (req, res) => {
         props: {
             name: 'SSR'
         },
+        hydratable: true,
         // Don't forget to pass URL into renderer
         url: req.url
     })
