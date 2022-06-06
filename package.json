@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build -c vite.config.ts --target esnext && vite build --ssr ./src/App.ssr.svelte -c vite.config.ssr.ts --target es2018",
+    "build": "vite build -c vite.config.ts --target esnext -m dev && vite build --ssr ./src/App.ssr.svelte -c vite.config.ssr.ts --target es2018 -m dev",
     "start": "vite preview",
+    "watch:dev": "vite build -c vite.config.ts --target esnext -m dev --watch",
+    "watch:ssr": "vite build --ssr ./src/App.ssr.svelte -c vite.config.ssr.ts --target es2018 -m dev --watch",
+    "watch:ws": "nodemon -e \".ts,.svelte\" -i dist --watch src ./server.ssr.ts",
     "start:ssr": "nodemon -e \".ts,.svelte\" -i dist --watch src --exec \"pnpm build && ts-node ./server.ssr.ts\""
   },
   "devDependencies": {
