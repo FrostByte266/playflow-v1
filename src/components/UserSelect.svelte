@@ -18,6 +18,12 @@
             name: "Sarah Lynn"
         }
     ]
+
+    function reset() {
+        selectedUser = undefined
+        enteredPin = undefined
+    }
+
     let selectedUser: IEmployee;
     let enteredPin: string
     let pinView: string
@@ -34,7 +40,7 @@
                 {:else}
                     <h1 class="text-gray-300">Enter your pin</h1>
                 {/if}
-                <button on:click={() => selectedUser = null}>Return to user select</button>
+                <button on:click={reset}>Return to user select</button>
             {:else}
                 <h1 class="text-3xl">Welcome #{storeNumber}. Please select a user</h1>
                 <div class="w-full p-5 gap-5 flex justify-around items-center">
