@@ -1,4 +1,5 @@
 export interface IEmployee {
     ID: number,
-    name: string
+    name: string,
+    pin: number
 }

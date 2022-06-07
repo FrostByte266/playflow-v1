@@ -2,26 +2,42 @@
     import EmployeeInfo from '../components/EmployeeInfo.svelte'
     import PinEntry from '../components/PinEntry.svelte'
 
+    import { currentUser } from '../stores/loginStore'
+    import router from '../router/router'
+
     import type { IEmployee } from '../types/employee'
     const storeNumber = 795
     const employees: Array<IEmployee> = [
         {
             ID: 445324,
-            name: "John Doe"
+            name: "John Doe",
+            pin: 12345
         },
         {
             ID: 424561,
-            name: "Bob Smith"
+            name: "Bob Smith",
+            pin: 54321
         },
         {
             ID: 347653,
-            name: "Sarah Lynn"
+            name: "Sarah Lynn",
+            pin: 11111
         }
     ]
 
     function reset() {
         selectedUser = undefined
         enteredPin = undefined
+    }
+
+    function logIn() {
+        if(selectedUser.pin === Number(enteredPin)) {
+            currentUser.set(selectedUser)
+            router.push('/home')
+        } else {
+            console.log('Wrong password')
+        }
+
     }
 
     let selectedUser: IEmployee;
@@ -34,7 +50,7 @@
             {#if selectedUser}
                 <h1 class="text-3xl">{selectedUser.name}, please enter your PIN</h1>
                 <EmployeeInfo employee={selectedUser} />
-                <PinEntry bind:enteredPin bind:pinView />
+                <PinEntry on:submit={logIn} bind:enteredPin bind:pinView />
                 {#if enteredPin}
                     <h1>{pinView}</h1>
                 {:else}

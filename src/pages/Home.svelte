@@ -1,17 +1,19 @@
 <script lang="ts">
-    // import enforceLogin from '../utils/loginGuard'
+    import enforceLogin from '../utils/loginGuard'
     import router from '../router/router'
     import { currentUser } from '../stores/loginStore'
     import EmployeeInfo from '../components/EmployeeInfo.svelte'
 
-    // enforceLogin($currentUser, router)
+    enforceLogin($currentUser, router)
 </script>
 
 <div class="h-screen">
     <div class="flex justify-end items-center">
         <h1>▶️ PlayFlow 🌊</h1>
         <div class="p-5">
-            <EmployeeInfo employee={{name: 'Bob', ID: 429072}} />
+            {#if $currentUser}
+                <EmployeeInfo employee={$currentUser} />
+            {/if}
         </div>
     </div>
     
