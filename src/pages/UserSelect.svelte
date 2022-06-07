@@ -1,6 +1,6 @@
 <script lang="ts">
-    import EmployeeInfo from './EmployeeInfo.svelte'
-    import PinEntry from './PinEntry.svelte'
+    import EmployeeInfo from '../components/EmployeeInfo.svelte'
+    import PinEntry from '../components/PinEntry.svelte'
 
     import type { IEmployee } from '../types/employee'
     const storeNumber = 795

@@ -5,23 +5,21 @@
  */
 
 import Router from 'svelte-easyroute'
-import UserSelect from '../components/UserSelect.svelte'
-import PinEntry from '../components/PinEntry.svelte'
-
-const routes = [
-    {
-        path: '/login',
-        component: UserSelect
-    },
-    {
-        path: '/pin',
-        component: PinEntry
-    }
-]
+import UserSelect from '../pages/UserSelect.svelte'
+import Home from '../pages/Home.svelte'
 
 const router = new Router({
     mode: 'history',
-    routes
+    routes: [
+        {
+            path: '/login',
+            component: UserSelect
+        },
+        {
+            path: '/home',
+            component: Home,
+        }
+    ]
 })
 
 export default router
