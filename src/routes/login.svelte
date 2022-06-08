@@ -35,7 +35,7 @@
         // the component that calls this function is only
         // rendered if there is a user selected
         if(selectedUser!.pin === Number(enteredPin)) {
-            goto('/home')
+            goto('/')
         } else {
             message = 'Wrong password, try again'
         }
