@@ -2,8 +2,6 @@
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
     import { employees, games } from '$lib/stores/seedData'
 
-    import type { IGame } from '$lib/types/game'
-
     const current = $games[0]
     const next = $games[1]
 
