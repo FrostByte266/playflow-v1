@@ -3,7 +3,7 @@ import { readable, get } from 'svelte/store'
 import * as IssueEnum from '$lib/types/issueEnums'
 
 import type { IEmployee } from '$lib/types/employee'
-import type { IGameIssue } from '$lib/types/game'
+import type { IGame, IGameIssue } from '$lib/types/game'
 
 export const employees = readable<Array<IEmployee>>([
     {
@@ -23,13 +23,22 @@ export const employees = readable<Array<IEmployee>>([
     }
 ])
 
+export const games = readable<Array<IGame>>([
+    {
+        name: "Let's go jungle",
+        manufacturer: 'SEGA',
+        photo: 'https://www.spttechsupport.com/uploads/6/9/3/7/69377421/9790329.jpg?372'
+    },
+    {
+        name: "Bikini Bottom Bowling",
+        manufacturer: 'Chicago Gaming Company',
+        photo: 'https://www.spttechsupport.com/uploads/6/9/3/7/69377421/7181044.jpg?371'
+    }
+])
+
 export const gameIssues = readable<Array<IGameIssue>>([
     {
-        game: {
-            name: "Let's go jungle",
-            manufacturer: 'SEGA',
-            photo: 'https://example.com'
-        },
+        game: get(games)[0],
         description: 'Screen going blank',
         reportedBy: get(employees)[0],
         date: new Date(),
@@ -37,11 +46,7 @@ export const gameIssues = readable<Array<IGameIssue>>([
         state: IssueEnum.Status.CONFIRMED
     },
     {
-        game: {
-            name: "Bikini Bottom Bowling",
-            manufacturer: 'Chicago Gaming Company',
-            photo: 'https://example.com'
-        },
+        game: get(games)[1],
         description: 'Game does not start when it has been sitting off overnight',
         reportedBy: get(employees)[1],
         date: new Date(),
