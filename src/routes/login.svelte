@@ -2,28 +2,13 @@
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
     import PinEntry from '$lib/components/PinEntry.svelte'
 
+    import { employees } from '$lib/stores/seedData'
+
     import { goto } from '$app/navigation'
 
     import type { IEmployee } from '$lib/types/employee'
     import type { Optional } from '$lib/types/utility'
     const storeNumber = 795
-    const employees: Array<IEmployee> = [
-        {
-            ID: 445324,
-            name: "John Doe",
-            pin: 12345
-        },
-        {
-            ID: 424561,
-            name: "Bob Smith",
-            pin: 54321
-        },
-        {
-            ID: 347653,
-            name: "Sarah Lynn",
-            pin: 11111
-        }
-    ]
 
     function reset() {
         selectedUser = undefined
@@ -47,6 +32,11 @@
     let pinView: string
     let message = ''
 </script>
+
+<svelte:head>
+    <title>Login</title>
+</svelte:head>
+
 <div class="bg-gray-300 h-screen ">
     <div class="h-full flex flex-col items-center justify-center">
         <div class="p-5 flex flex-col align-center items-center bg-gray-400 rounded-lg">
@@ -64,7 +54,7 @@
             {:else}
                 <h1 class="text-3xl">Welcome #{storeNumber}. Please select a user</h1>
                 <div class="w-full p-5 gap-5 flex justify-around items-center">
-                    {#each employees as employee (employee.ID)}
+                    {#each $employees as employee (employee.ID)}
                         <div class="transition-transform hover:scale-125">
                             <EmployeeInfo on:click={() => selectedUser=employee} {employee} />
                         </div>
