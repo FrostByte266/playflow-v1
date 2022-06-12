@@ -8,7 +8,7 @@
 </svelte:head>
 
 <div class="flex justify-between items-center">
-    <h1 class="text-3xl text-center pl-5 select-none cursor-default">Managing Users</h1>
+    <h1 class="text-3xl text-center pl-5 select-none cursor-default">Managing Games</h1>
     <div class="p-5">
         <EmployeeInfo employee={$employees[0]} />
     </div>
