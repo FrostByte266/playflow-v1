@@ -1,6 +1,7 @@
 import { readable, get } from 'svelte/store'
 
-import * as IssueEnum from '$lib/types/issueEnums'
+import * as IssueEnum from '$lib/types/enums/issue'
+import { Roles } from '$lib/types/enums/employee'
 
 import type { IEmployee } from '$lib/types/employee'
 import type { IGame, IGameIssue } from '$lib/types/game'
@@ -9,17 +10,20 @@ export const employees = readable<Array<IEmployee>>([
     {
         ID: 445324,
         name: "John Doe",
-        pin: 12345
+        pin: 12345,
+        role: Roles.TECH
     },
     {
         ID: 424561,
         name: "Bob Smith",
-        pin: 54321
+        pin: 54321,
+        role: Roles.MANAGER
     },
     {
         ID: 347653,
         name: "Sarah Lynn",
-        pin: 11111
+        pin: 11111,
+        role: Roles.CAST_MEMBER
     }
 ])
 

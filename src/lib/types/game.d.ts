@@ -1,5 +1,5 @@
 import type { IEmployee } from './employee'
-import type * as Issue from './issueEnums'
+import type * as Issue from './enums/issue'
 
 export interface IGame {
     name: string,

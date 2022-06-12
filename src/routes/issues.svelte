@@ -1,7 +1,7 @@
 <script lang="ts">
     import GameIssue from '$lib/components/GameIssue.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
-    import * as IssueEnum from '$lib/types/issueEnums'
+    import * as IssueEnum from '$lib/types/enums/issue'
     import { employees, gameIssues } from '$lib/stores/seedData'
 
     import type { IGameIssue } from '$lib/types/game'
