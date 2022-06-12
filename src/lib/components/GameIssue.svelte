@@ -17,6 +17,7 @@
         <h1 class="text-lg">{issue.game.name}</h1>
         <h1 class="text-lg">Reported on {issue.date.toLocaleDateString()}</h1>
         <h1 class="text">By: {issue.reportedBy.name} ({String(issue.reportedBy.ID).padStart(9, '0')})</h1>
+        <h1 class="text">{issue.reportedBy.role}</h1>
     </div>
     <div class="flex flex-col justify-between items-center">
         <h1 class="text-lg">Issue Type: {issue.type}</h1>
