@@ -12,7 +12,7 @@
 </script>
 
 
-<div class="{resolvedBg} my-2 p-5 flex justify-between" >
+<div class="{resolvedBg} my-2 mx-5 p-5 flex justify-between" >
     <div class="flex flex-col justify-center items-center">
         <h1 class="text-lg">{issue.game.name}</h1>
         <h1 class="text-lg">Reported on {issue.date.toLocaleDateString()}</h1>
