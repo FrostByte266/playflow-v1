@@ -13,19 +13,6 @@
         month: 'long',
         day: 'numeric'
     })
-
-    const sampleData: IGameIssue = {
-        game: {
-            name: "Let's go jungle",
-            manufacturer: 'SEGA',
-            photo: 'https://example.com'
-        },
-        description: 'Screen going blank',
-        reportedBy: $employees[0],
-        date: new Date(),
-        type: IssueEnum.Type.DOWN,
-        state: IssueEnum.Status.CONFIRMED
-    }
 </script>
 
 <svelte:head>

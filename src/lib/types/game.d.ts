@@ -3,6 +3,7 @@ import type * as Issue from './enums/issue'
 
 export interface IGame {
     name: string,
+    playerCount: number,
     manufacturer: string,
     photo: string
 }

@@ -30,11 +30,13 @@ export const employees = readable<Array<IEmployee>>([
 export const games = readable<Array<IGame>>([
     {
         name: "Let's go jungle",
+        playerCount: 2,
         manufacturer: 'SEGA',
         photo: 'https://www.spttechsupport.com/uploads/6/9/3/7/69377421/9790329.jpg?372'
     },
     {
         name: "Bikini Bottom Bowling",
+        playerCount: 1,
         manufacturer: 'Chicago Gaming Company',
         photo: 'https://www.spttechsupport.com/uploads/6/9/3/7/69377421/7181044.jpg?371'
     }
