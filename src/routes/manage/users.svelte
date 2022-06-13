@@ -1,7 +1,12 @@
 <script lang="ts">
     import { employees } from '$lib/stores/seedData'
     import EditableEmployee from '$lib/components/EditableEmployee.svelte'
+    import NewEmployee from '$lib/components/NewEmployee.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
+
+    function addNew(e: CustomEvent) {
+        employees.update(employees => [e.detail, ...employees])
+    }
 </script>
 <svelte:head>
     <title>Manage Users</title>
@@ -15,6 +20,7 @@
 </div>
 
 <div class="grid-cols-3 auto-rows-auto items-center justify-center">
+    <NewEmployee on:created={addNew} />
     {#each $employees as employee (employee.ID)}
         <EditableEmployee {employee} />
     {/each}
