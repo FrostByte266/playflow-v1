@@ -4,15 +4,11 @@
     import type { IGameIssue } from '$lib/types/game'
 
     export let issue: IGameIssue
-    export let secondaryBg = false
 
-    let resolvedBg: string;
-
-    $: resolvedBg = `bg-gray-${secondaryBg ? '300' : '400'}`
 </script>
 
 
-<div class="{resolvedBg} my-2 mx-5 p-5 flex justify-between" >
+<div class="my-2 mx-5 p-5 flex justify-between even:bg-gray-300 odd:bg-gray-400" >
     <div class="flex flex-col justify-center items-center">
         <h1 class="text-lg">{issue.game.name}</h1>
         <h1 class="text-lg">Reported on {issue.date.toLocaleDateString()}</h1>

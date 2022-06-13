@@ -1,11 +1,7 @@
 <script lang="ts">
     import GameIssue from '$lib/components/GameIssue.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
-    import * as IssueEnum from '$lib/types/enums/issue'
     import { employees, gameIssues } from '$lib/stores/seedData'
-
-    import type { IGameIssue } from '$lib/types/game'
-
 
     const today = new Date().toLocaleDateString('en-US', {
         weekday: 'long',
@@ -27,6 +23,6 @@
     </div>
 </div>
 
-
-<GameIssue secondaryBg={true} issue={$gameIssues[0]} />
-<GameIssue secondaryBg={false} issue={$gameIssues[1]} />
+{#each $gameIssues as issue (issue.game.name)}
+    <GameIssue {issue} />
+{/each}
