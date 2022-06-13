@@ -1,7 +1,12 @@
 <script lang="ts">
     import { employees, games } from '$lib/stores/seedData'
     import EditableGame from '$lib/components/EditableGame.svelte'
+    import NewGame from '$lib/components/NewGame.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
+
+    function addNew(e: CustomEvent) {
+        games.update(games => [e.detail, ...games])
+    }
 </script>
 <svelte:head>
     <title>Manage Games</title>
@@ -15,6 +20,7 @@
 </div>
 
 <div class="grid-cols-3 auto-rows-auto items-center justify-center">
+    <NewGame on:created={addNew} />
     {#each $games as game (game.name)}
         <EditableGame {game} />
     {/each}

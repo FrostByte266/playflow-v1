@@ -1,4 +1,4 @@
-import { readable, get } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 
 import * as IssueEnum from '$lib/types/enums/issue'
 import { Roles } from '$lib/types/enums/employee'
@@ -6,7 +6,7 @@ import { Roles } from '$lib/types/enums/employee'
 import type { IEmployee } from '$lib/types/employee'
 import type { IGame, IGameIssue } from '$lib/types/game'
 
-export const employees = readable<Array<IEmployee>>([
+export const employees = writable<Array<IEmployee>>([
     {
         ID: 445324,
         name: "John Doe",
@@ -27,7 +27,7 @@ export const employees = readable<Array<IEmployee>>([
     }
 ])
 
-export const games = readable<Array<IGame>>([
+export const games = writable<Array<IGame>>([
     {
         name: "Let's go jungle",
         playerCount: 2,
@@ -42,7 +42,7 @@ export const games = readable<Array<IGame>>([
     }
 ])
 
-export const gameIssues = readable<Array<IGameIssue>>([
+export const gameIssues = writable<Array<IGameIssue>>([
     {
         game: get(games)[0],
         description: 'Screen going blank',
