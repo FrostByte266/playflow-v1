@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 const router = Router()
 
-router.get('ts', (req, res) => {
+router.get('/ts', (req, res) => {
     res.send('booyah')
 })
 
