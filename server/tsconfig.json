@@ -4,7 +4,7 @@
       "target": "es6",
       "module": "commonjs",
       "rootDir": "./",
-      "outDir": "./build/foo",
+      "outDir": "./build/backend",
       "esModuleInterop": true,
       "strict": true,
       "allowJs": true,
