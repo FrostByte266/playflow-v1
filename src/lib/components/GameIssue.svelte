@@ -1,12 +1,29 @@
 <script lang="ts">
-    import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
-
     import type { IGameIssue } from '$lib/types/game'
+    import toggleable from '$lib/utils/toggleStore'
 
     export let issue: IGameIssue
 
-</script>
 
+    let originalIssue: IGameIssue = {...issue} // Making a copy incase user wants to revert
+
+    const editing = toggleable(false)
+
+    function toggleEdit() {
+        if ($editing) {
+            // When the API is connected, this is where
+            // the update request would be sent
+            console.log('Finished editing')
+        }
+        editing.toggle()
+    }
+
+    function cancelEdit() {
+        issue = originalIssue
+        editing.toggle()
+    }
+
+</script>
 
 <div class="my-2 mx-5 p-5 flex justify-between even:bg-gray-300 odd:bg-gray-400" >
     <div class="flex flex-col justify-center items-center">
@@ -18,16 +35,20 @@
     <div class="flex flex-col justify-between items-center">
         <h1 class="text-lg">Issue Type: {issue.type}</h1>
         <h1 class="text-lg">Description:</h1>
-        <textarea class="p-2" readonly>{issue.description}</textarea>
+        <textarea class="p-2" readonly={!$editing} bind:value={issue.description}></textarea>
     </div>
     <div class="flex flex-col gap-2 justify-center items-center">
         <p class="w-full text bg-gray-500 p-2">Status: {issue.state}</p>
         <div class="w-full flex gap-3 text bg-gray-500 p-2">Actions:
-            <a href="/issue/edit" title="Edit issue">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" on:click={toggleEdit}>
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            {#if $editing }
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" on:click={cancelEdit}>
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
-            </a>
+            {/if}
             <a href="/issue/complete" title="Resolve Issue">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
