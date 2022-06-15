@@ -34,9 +34,30 @@ router.route('/:id')
         )
     })
     .delete((req, res) => {
-        Games.findByIdAndDelete(req.params.id, undefined, guardError<IGame>(res, {}, (game) => {
+        Games.findByIdAndDelete(req.params.id, undefined, guardError<IGame>(res, {}, game => {
             res.json({deleted: game})
         }))
+    })
+
+router.route('/:gameId/issues')
+    .get((req, res) => {
+        Games.findById(req.params.gameId, 'issues', undefined, guardError<IGame>(res, {}, doc => {
+            if (doc !== null) {
+                res.json(doc.issues)
+            }
+        }))
+    })
+    .post((req, res) => {
+        Games.findByIdAndUpdate(req.params.gameId,
+            {
+                $push: { 'issues': req.body }
+            },
+            { new: true },
+            guardError<IGame>(res, {}, updated => {
+                    res.json(updated)
+                }
+            )
+        )
     })
 
 export default router
