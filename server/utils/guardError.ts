@@ -2,9 +2,9 @@ import type { Response } from "express";
 import type { CallbackError, HydratedDocument } from "mongoose";
 import Codes from 'http-status-codes'
 
-type MaybeArray<T> = T[] | T
-type DocumentOrQueryResult<T> = MaybeArray<HydratedDocument<T>>
-type MongoCallback<T> = (err: CallbackError, doc: DocumentOrQueryResult<T>) => void
+type MaybeArray<T> = T extends Array<T> ? Array<T> : T
+type DocumentOrQueryResult<T> = MaybeArray<HydratedDocument<T>> | null
+type MongoCallback<T> = (err: CallbackError, doc: DocumentOrQueryResult<T> | null) => void
 type SuccessCallback<T> = (doc: DocumentOrQueryResult<T>) => void
 type ErrorCallback = (res: Response, err: CallbackError) => void
 
