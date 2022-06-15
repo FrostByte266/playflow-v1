@@ -1,6 +1,7 @@
 import express from 'express'
 
-import gameRouter from './routers/games'
+import gamesRouter from './routers/games'
+import employeesRouter from './routers/employees'
 
 import './db/connection'
 
@@ -11,7 +12,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Connect routers
-app.use('/games', gameRouter)
+app.use('/games', gamesRouter)
+app.use('/employees', employeesRouter)
 
 // Launch app
 app.listen(3000, () => {
