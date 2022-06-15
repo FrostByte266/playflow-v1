@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env DB=techtool PORT=3000 nodemon",
     "dev": "nodemon -e ts,json,js --exec \"pnpm build && node index.js\"",
-    "build": "tsc main.ts && mv main.js build/backend.cjs",
+    "build": "tsc main.ts && mv main.js build.cjs",
     "db:seed": "cross-env DB=techtool ts-node db/seed.ts",
     "db:seed:fresh": "cross-env DB=techtool ts-node db/seed.ts --reset"
   },

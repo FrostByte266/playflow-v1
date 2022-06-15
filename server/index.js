@@ -1,9 +1,7 @@
 import express from 'express'
 
 import { handler } from './build/handler.js'
-import { indexRouter } from './build/backend.cjs'
-
-import './db/connection'
+import { indexRouter } from './build.cjs'
 
 const app = express()
 

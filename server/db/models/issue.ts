@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 import type { IGameIssue } from '../types/game.d'
-import { Issue } from '../types/enums/issue'
+import * as Issue from '../types/enums/issue'
 
 export const GameIssueSchema = new Schema<IGameIssue>({
     description: String,
