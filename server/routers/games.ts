@@ -7,26 +7,36 @@ import Games from '../db/models/game'
 const router = Router()
 
 router.route('/')
-    .get((req, res) => {
-        Games.find({}, undefined, guardError<IGame>(res, {}, games => {
-            res.json(games)
-        }))
-    })
     .post((req, res) => {
         Games.create(req.body)
             .then(game => res.json(game))
             .catch(err => res.status(500).json(err))
     })
+    .get((req, res) => {
+        Games.find({}, undefined, guardError<IGame>(res, {}, games => {
+            res.json(games)
+        }))
+    })
 
 router.route('/:id')
     .get((req, res) => {
-        res.end()
+        Games.findById(req.params.id, undefined, guardError<IGame>(res, {}, game => {
+            res.json(game)
+        }))
     })
     .patch((req, res) => {
-        res.end()
+        Games.findByIdAndUpdate(req.params.id, 
+            { $set: req.body },
+            { new: true },
+            guardError<IGame>(res, {}, game => {
+                res.json(game)
+            })
+        )
     })
     .delete((req, res) => {
-        res.end()
+        Games.findByIdAndDelete(req.params.id, undefined, guardError<IGame>(res, {}, (game) => {
+            res.json({deleted: game})
+        }))
     })
 
 export default router

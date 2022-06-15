@@ -1,15 +1,19 @@
-import { Router } from 'express'
+import express from 'express'
 
 import gameRouter from './routers/games'
 
 import './db/connection'
 
-const router = Router()
+// Configuration
+const app = express()
 
-router.get('/ts', (req, res) => {
-    res.send('booyah')
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// Connect routers
+app.use('/games', gameRouter)
+
+// Launch app
+app.listen(3000, () => {
+    console.log('Locked and loaded!')
 })
-
-router.use(gameRouter)
-
-export { router as indexRouter }
