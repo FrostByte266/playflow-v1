@@ -1,15 +1,16 @@
 import type { Response } from "express";
-import type { CallbackError, HydratedDocument } from "mongoose";
+import type { CallbackError, Types, HydratedDocument } from "mongoose";
 import Codes from 'http-status-codes'
 
-type MaybeArray<T> = T extends Array<T> ? Array<T> : T
-type DocumentOrQueryResult<T> = MaybeArray<HydratedDocument<T>> | null
+type DocumentArray<T> = Types.DocumentArray<T>
+
+type MaybeArray<T> = T extends Array<T> ? DocumentArray<T> : HydratedDocument<T>
+type DocumentOrQueryResult<T> = MaybeArray<T> | null
 type MongoCallback<T> = (err: CallbackError, doc: DocumentOrQueryResult<T> | null) => void
 type SuccessCallback<T> = (doc: DocumentOrQueryResult<T>) => void
-type ErrorCallback = (res: Response, err: CallbackError) => void
 
 interface ErrorHandlerMap {
-    [eName: string]: ErrorCallback
+    [eName: string]: (res: Response, err: CallbackError) => void 
 }
 
 /**
@@ -29,11 +30,14 @@ interface ErrorHandlerMap {
 export default function guardError<T>(res: Response, errHandlers: ErrorHandlerMap, onSuccess: SuccessCallback<T>): MongoCallback<T> {
     return (err: CallbackError, doc: DocumentOrQueryResult<T>) => {
         if(err) {
+            console.log(err)
             if (err.name in errHandlers) {
                 errHandlers[err.name](res, err)
             } else {
                 res.status(Codes.INTERNAL_SERVER_ERROR).json(err)
             }
+        } else if (doc === null) {
+            res.status(Codes.NOT_FOUND).json({error: "Resource not found"})
         } else {
             onSuccess(doc)
         }

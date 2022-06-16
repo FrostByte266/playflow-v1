@@ -6,8 +6,8 @@ export const GameIssueSchema = new Schema<IGameIssue>({
     description: { type: String, required: true},
     reportedBy: { type: Schema.Types.ObjectId, ref: 'Employee', required: true},
     date: { type: Date, required: true},
-    type: {type: String, enum: Object.keys(Issue.Type), required: true},
-    state: {type: String, enum: Object.keys(Issue.Status), default: Issue.Status.REPORTED}
+    type: {type: String, enum: Object.values(Issue.Type), required: true},
+    state: {type: String, enum: Object.values(Issue.Status), default: Issue.Status.REPORTED}
 })
 
 export default model('GameIssue', GameIssueSchema)

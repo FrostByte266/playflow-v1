@@ -4,6 +4,8 @@ import guardError from '../utils/guardError'
 
 import Games from '../db/models/game'
 
+import issuesRouter from './issues'
+
 const router = Router()
 
 router.route('/')
@@ -39,25 +41,6 @@ router.route('/:id')
         }))
     })
 
-router.route('/:gameId/issues')
-    .get((req, res) => {
-        Games.findById(req.params.gameId, 'issues', undefined, guardError<IGame>(res, {}, doc => {
-            if (doc !== null) {
-                res.json(doc.issues)
-            }
-        }))
-    })
-    .post((req, res) => {
-        Games.findByIdAndUpdate(req.params.gameId,
-            {
-                $push: { 'issues': req.body }
-            },
-            { new: true },
-            guardError<IGame>(res, {}, updated => {
-                    res.json(updated)
-                }
-            )
-        )
-    })
+router.use(issuesRouter)
 
 export default router
