@@ -12,6 +12,7 @@ export interface IGameIssue {
 }
 export interface IGame {
     name: string,
+    cardTapPosition: number,
     playerCount: number,
     manufacturer: string,
     photo: string,
