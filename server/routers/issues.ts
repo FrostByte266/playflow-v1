@@ -36,10 +36,10 @@ router.route('/:gameId/issues/:issueId')
     .get((req, res) => {
         Games.findById(req.params.gameId, 'issues')
         .populate('issues.reportedBy')
-            .exec(guardError<IGame>(res, {}, game => {
-                    const issue = game?.issues.id(req.params.issueId)
-                    res.json(issue)
-            }))
+        .exec(guardError<IGame>(res, {}, game => {
+                const issue = game?.issues.id(req.params.issueId)
+                res.json(issue)
+        }))
     })
     .patch((req, res) => {
         Games.findById(req.params.gameId, 'issues', guardError<IGame>(res, {}, doc => {
@@ -66,7 +66,7 @@ router.route('/:gameId/issues/:issueId')
         },
         { new: true},
         guardError<IGame>(res, {}, () => {
-            res.json({deleted: req.params.issueId})
+            res.json({deleted: req.params.issueId })
         }))
     })
 
