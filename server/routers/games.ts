@@ -41,6 +41,13 @@ router.route('/:id')
         }))
     })
 
+router.get('/:id/next', (req, res) => {
+    const gameId = Number(req.params.id)
+    Games.find({ cardTapPosition: gameId + 1}, guardError<IGame>(res, {}, game => {
+        res.json(game)
+    }))
+})
+
 router.use(issuesRouter)
 
 export default router
