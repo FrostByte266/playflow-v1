@@ -6,6 +6,7 @@ export interface IUpdatableIssue extends Partial<HydratedDocument<IGameIssue>> {
 }
 
 export interface ITapUpdateBody {
+    currentIdx: number
     new: Array<IGameIssue>
     update: Array<IUpdatableIssue>
 }

@@ -50,7 +50,7 @@ router.route('/:gameId/issues/:issueId')
                     if(e) {
                         res.status(Codes.BAD_REQUEST).json(e)
                     } else {
-                        res.json(doc)
+                        res.json(currentDoc)
                     }
                 })
             } else {

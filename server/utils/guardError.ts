@@ -36,8 +36,6 @@ export default function guardError<T>(res: Response, errHandlers: ErrorHandlerMa
             } else {
                 res.status(Codes.INTERNAL_SERVER_ERROR).json(err)
             }
-        } else if (doc === null) {
-            res.status(Codes.NOT_FOUND).json({error: "Resource not found"})
         } else {
             onSuccess(doc)
         }

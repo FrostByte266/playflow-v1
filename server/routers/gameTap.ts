@@ -23,8 +23,8 @@ router.route('/')
             
     })
     .get((req, res) => {
-        GameTap.find({}, undefined, guardError<IGameTap>(res, {}, games => {
-            res.json(games)
+        GameTap.find({}, undefined, guardError<IGameTap>(res, {}, taps => {
+            res.json(taps)
         }))
     })
 
@@ -52,19 +52,19 @@ router.route('/:tapId/:gameId')
         const body: ITapUpdateBody = req.body
         const created = await Promise.all(
                 body.new.map<Promise<HydratedDocument<IGameIssue>>>(async newIssue => {
-                return await createIssue(req.params.gameId, newIssue)
+                return await createIssue(req, req.params.gameId, newIssue)
             })
         )
         const updated = await Promise.all(
                 body.update.map<Promise<HydratedDocument<IGameIssue>>>(async updatedIssue => {
-                return await updateIssue(req.params.gameId, String(updatedIssue._id), updatedIssue)
+                return await updateIssue(req, req.params.gameId, String(updatedIssue._id), updatedIssue)
             })
         )
         GameTap.findByIdAndUpdate(req.params.tapId, {
             $push: {tappedGames: req.params.gameId}
         }, undefined, guardError<IGameTap>(res, {}, async () => {
             res.json({
-                next: await nextGame(req.params.gameId),
+                next: await nextGame(req, body.currentIdx),
                 created,
                 updated
             })
