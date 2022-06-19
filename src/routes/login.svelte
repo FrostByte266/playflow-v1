@@ -16,11 +16,12 @@
 
 
     import { goto } from '$app/navigation'
+    import apiRoute from '$lib/utils/apiRoute'
 
     import type { IEmployee } from '$lib/types/employee'
     import type { Optional } from '$lib/types/utility'
     const storeNumber = 795
-    export let employees: IEmployee[];
+    export let employees: Array<IEmployee>;
 
     function reset() {
         selectedUser = undefined
@@ -31,13 +32,13 @@
         // We can use type assertions here because
         // the component that calls this function is only
         // rendered if there is a user selected
-        const res = await fetch('http://localhost:3100/auth/login', {
+        const res = await fetch(apiRoute('/auth/login'), {
             method: 'POST',
-            credentials: "include",
-            headers: { "Content-Type": "application/json"},
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({
                 ID: selectedUser!.ID,
-                pin: Number(enteredPin)
+                pin: enteredPin
             })
         })
 
