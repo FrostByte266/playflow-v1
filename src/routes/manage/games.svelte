@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { employees, games } from '$lib/stores/seedData'
+    import { games } from '$lib/stores/seedData'
+    import { session } from '$app/stores'
     import EditableGame from '$lib/components/EditableGame.svelte'
     import NewGame from '$lib/components/NewGame.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
@@ -15,7 +16,7 @@
 <div class="flex justify-between items-center">
     <h1 class="text-3xl text-center pl-5 select-none cursor-default">Managing Games</h1>
     <div class="p-5">
-        <EmployeeInfo employee={$employees[0]} />
+        <EmployeeInfo employee={$session.user} />
     </div>
 </div>
 

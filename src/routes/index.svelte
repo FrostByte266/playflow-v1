@@ -1,7 +1,8 @@
 <script lang="ts">
+    
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
 
-    import { employees } from '$lib/stores/seedData'
+    import { session } from '$app/stores'
 </script>
 
 <svelte:head>
@@ -11,7 +12,7 @@
 <div class="flex justify-between items-center">
     <h1 class="text-3xl text-center pl-5 select-none cursor-default">▶️ PlayFlow 🌊</h1>
     <div class="p-5">
-        <EmployeeInfo employee={$employees[0]} />
+        <EmployeeInfo employee={$session.user} />
     </div>
 </div>
 

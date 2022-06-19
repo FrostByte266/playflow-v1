@@ -1,7 +1,45 @@
-import type { Handle } from "@sveltejs/kit";
+import type { Handle, GetSession } from "@sveltejs/kit"
+import type { IEmployee } from '$lib/types/employee'
+
+import jwtDecode from "jwt-decode"
+
+interface JWT extends IEmployee {
+    exp: number
+}
 
 export const handle: Handle = async ({ event, resolve }) => {
-    // For now we're not doing anything, once the API is connected,
-    // we will be checking user auth here
-    return await resolve(event)
+    // Make sure we are not trying to parse out tokens when visting login screen
+    if(event.url.pathname.includes('login')) {
+        return await resolve(event)
+    }
+    try {
+        const token = jwtDecode<JWT>(event.request.headers.get('cookie') || '')
+        // JWT expiry dates are expressed as UNIX epoch (seconds),
+        // Date objects use microseconds, so we must make the two equal in scale
+        if(token.exp * 1000 < Date.now()) {
+            throw new Error('Expired token')
+        }
+        event.locals.user = { 
+            ID: token.ID,
+            name: token.name,
+            role: token.role
+        }
+        return await resolve(event)
+    } catch (e) {
+        // If there are errors decoding the JWT, it has been altered by the client,
+        // redirect to the login page to get a new one
+        // Will also redirect if the JWT was expired
+        return new Response('Redirect',
+            {
+                status: 303,
+                headers: {
+                    Location: '/login'
+                }
+            }
+        )
+    }
+    
 }
+
+export const getSession: GetSession = event => event.locals
+
