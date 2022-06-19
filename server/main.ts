@@ -2,7 +2,6 @@ import express from 'express'
 import Codes from 'http-status-codes'
 import { expressjwt } from "express-jwt"
 import RevokedTokens from './db/models/revokedToken'
-import guardError from './utils/guardError'
 
 import gamesRouter from './routers/games'
 import employeesRouter from './routers/employees'
