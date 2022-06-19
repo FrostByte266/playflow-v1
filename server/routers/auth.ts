@@ -20,8 +20,9 @@ router.post('/login', (req, res) => {
             res.status(Codes.UNAUTHORIZED).json({error: 'No matching credentials found'})
         } else {
             const jwtid = randomBytes(16).toString('hex')
-            const token = jwt.sign(employee.toObject(), 'superSecretDevToken', { expiresIn: 60**2, jwtid })
-            res.json({ authorized: employee, token })
+            const token = jwt.sign(employee.toObject(), 'superSecretDevToken', { expiresIn: '1h', jwtid })
+            res.cookie('token', token, { httpOnly: true })
+            res.json({ authorized: employee })
         }
     }))
 })
@@ -35,6 +36,7 @@ router.post('/logout', (req: JWTAuthenticatedRequest, res) => {
             expireAt: new Date(req.auth.iat * 1000),
             identifier: req.auth.jti
         })
+        res.clearCookie('token', { httpOnly: true })
     }
     res.status(Codes.NO_CONTENT).end()
 })

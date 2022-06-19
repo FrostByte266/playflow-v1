@@ -1,6 +1,7 @@
 import express from 'express'
 import Codes from 'http-status-codes'
 import { expressjwt } from "express-jwt"
+import cookieParser from 'cookie-parser'
 import RevokedTokens from './db/models/revokedToken'
 
 import gamesRouter from './routers/games'
@@ -17,6 +18,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(expressjwt({
     secret: 'superSecretDevToken',
     algorithms: ['HS256'],
@@ -33,6 +35,9 @@ app.use(expressjwt({
                     }
                 })
         })
+    },
+    getToken(req) {
+        return req.cookies.token || null
     }
 }).unless({ path: ['/auth/login']}))
 
