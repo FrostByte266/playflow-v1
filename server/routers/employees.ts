@@ -7,7 +7,7 @@ import Employees from '../db/models/employee'
 const router = Router()
 
 router.get('/preview', (req, res) => {
-    Employees.find({}, 'name ID -_id', guardError<IEmployee>(res, {}, employees => {
+    Employees.find({}, 'name ID role -_id', guardError<IEmployee>(res, {}, employees => {
         res.json(employees)
     }))
 })

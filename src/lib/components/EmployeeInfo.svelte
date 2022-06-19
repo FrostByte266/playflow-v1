@@ -11,4 +11,5 @@
     </div>
     <h1 class="text-xl text-center">{String(employee.ID).padStart(9,'0')}</h1>
     <h1 class="text-lg text-center">{employee.name}</h1>
+    <h1 class="text text-center">{employee.role}</h1>
 </div>
