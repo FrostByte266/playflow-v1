@@ -19,11 +19,8 @@ export const handle: Handle = async ({ event, resolve }) => {
         if(token.exp * 1000 < Date.now()) {
             throw new Error('Expired token')
         }
-        event.locals.user = { 
-            ID: token.ID,
-            name: token.name,
-            role: token.role
-        }
+        const { ID, name, role } = token
+        event.locals.user = { ID, name, role }
         return await resolve(event)
     } catch (e) {
         // If there are errors decoding the JWT, it has been altered by the client,
