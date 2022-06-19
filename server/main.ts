@@ -2,6 +2,7 @@ import express from 'express'
 import Codes from 'http-status-codes'
 import { expressjwt } from "express-jwt"
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import RevokedTokens from './db/models/revokedToken'
 
 import gamesRouter from './routers/games'
@@ -16,6 +17,7 @@ import type { Request, Response, NextFunction } from 'express'
 // Configuration
 const app = express()
 
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
