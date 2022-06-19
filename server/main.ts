@@ -39,7 +39,7 @@ app.use(expressjwt({
     getToken(req) {
         return req.cookies.token || null
     }
-}).unless({ path: ['/auth/login']}))
+}).unless({ path: ['/auth/login', '/employees/preview']}))
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err.name === "UnauthorizedError") {
@@ -56,6 +56,6 @@ app.use('/tap', tapRouter)
 app.use('/auth', authRouter)
 
 // Launch app
-app.listen(3000, () => {
+app.listen(3100, () => {
     console.log('Locked and loaded!')
 })

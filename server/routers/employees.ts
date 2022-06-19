@@ -1,10 +1,17 @@
 import { Router } from 'express'
-import type { IGame } from '../db/types/game'
+import type { IEmployee } from '../db/types/employee'
 import guardError from '../utils/guardError'
 
 import Employees from '../db/models/employee'
 
 const router = Router()
+
+router.get('/preview', (req, res) => {
+    Employees.find({}, 'name ID -_id', guardError<IEmployee>(res, {}, employees => {
+        res.json(employees)
+    }))
+})
+
 
 router.route('/')
     .post((req, res) => {
@@ -13,29 +20,29 @@ router.route('/')
             .catch(err => res.status(500).json(err))
     })
     .get((req, res) => {
-        Employees.find({}, undefined, guardError<IGame>(res, {}, games => {
-            res.json(games)
+        Employees.find({}, undefined, guardError<IEmployee>(res, {}, employees => {
+            res.json(employees)
         }))
     })
 
 router.route('/:id')
     .get((req, res) => {
-        Employees.findById(req.params.id, undefined, guardError<IGame>(res, {}, game => {
-            res.json(game)
+        Employees.findById(req.params.id, undefined, guardError<IEmployee>(res, {}, employee => {
+            res.json(employee)
         }))
     })
     .patch((req, res) => {
         Employees.findByIdAndUpdate(req.params.id, 
             { $set: req.body },
             { new: true },
-            guardError<IGame>(res, {}, game => {
-                res.json(game)
+            guardError<IEmployee>(res, {}, employee => {
+                res.json(employee)
             })
         )
     })
     .delete((req, res) => {
-        Employees.findByIdAndDelete(req.params.id, undefined, guardError<IGame>(res, {}, game => {
-            res.json({deleted: game})
+        Employees.findByIdAndDelete(req.params.id, undefined, guardError<IEmployee>(res, {}, employee => {
+            res.json({deleted: employee})
         }))
     })
 
