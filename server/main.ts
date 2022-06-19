@@ -1,6 +1,8 @@
 import express from 'express'
 import Codes from 'http-status-codes'
 import { expressjwt } from "express-jwt"
+import RevokedTokens from './db/models/revokedToken'
+import guardError from './utils/guardError'
 
 import gamesRouter from './routers/games'
 import employeesRouter from './routers/employees'
@@ -18,7 +20,21 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(expressjwt({
     secret: 'superSecretDevToken',
-    algorithms: ['HS256']
+    algorithms: ['HS256'],
+    isRevoked(req, token) {
+        return new Promise((resolve, reject) => {
+            // Type narrowing to make TS happy, again this
+            // check should never fail for any reason
+            if (token && token.payload && typeof token.payload !== 'string')
+                RevokedTokens.findOne({ identifier: token.payload.jti}, '', undefined, (err, token) => {
+                    if(err) {
+                        reject('Could not query database for token validity')
+                    } else {
+                        resolve(token !== null)
+                    }
+                })
+        })
+    }
 }).unless({ path: ['/auth/login']}))
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
