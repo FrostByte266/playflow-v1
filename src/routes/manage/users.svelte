@@ -1,12 +1,42 @@
+<script lang="ts" context="module">
+    import apiRoute, { defaultFetchProps } from '$lib/utils/apiRoute'
+    import type { Load } from './__types/users'
+
+    export const load: Load = async ({ fetch }) => {
+        const res = await fetch(apiRoute('/employees'), defaultFetchProps)
+        return {
+            props: {
+                employees: await res.json()
+            }
+        }
+    }
+</script>
+
 <script lang="ts">
-    import { employees } from '$lib/stores/seedData'
+
     import { session } from '$app/stores'
     import EditableEmployee from '$lib/components/EditableEmployee.svelte'
     import NewEmployee from '$lib/components/NewEmployee.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
 
-    function addNew(e: CustomEvent) {
-        employees.update(employees => [e.detail, ...employees])
+    import type { IEmployee } from '$lib/types/employee'
+
+    export let employees: Array<IEmployee>
+
+    async function addNew(e: CustomEvent<IEmployee>) {
+        console.log(JSON.stringify(e.detail))
+        const res = await fetch(apiRoute('/employees'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(e.detail),
+            ...defaultFetchProps
+        })
+        const data: IEmployee = await res.json()
+
+        const { name, ID, role } = data
+        employees = [{ name, ID, role }, ...employees]
     }
 </script>
 <svelte:head>
@@ -22,7 +52,7 @@
 
 <div class="grid-cols-3 auto-rows-auto items-center justify-center">
     <NewEmployee on:created={addNew} />
-    {#each $employees as employee (employee.ID)}
+    {#each employees as employee (employee.ID)}
         <EditableEmployee {employee} />
     {/each}
 </div>

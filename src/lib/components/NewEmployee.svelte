@@ -26,7 +26,7 @@
         newEmployee = {
             name: '',
             ID: 0,
-            pin: 0,
+            pin: '',
             role: Roles.CAST_MEMBER
         }
         editing.toggle()

@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
     import type { Load } from './__types/login'
     export const load: Load = async ({ fetch }) => {
-        const res = await fetch('http://localhost:3100/employees/preview')
+        const res = await fetch(apiRoute('/employees/preview'))
         return {
             props: {
                 employees: await res.json()
