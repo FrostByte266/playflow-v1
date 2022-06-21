@@ -20,7 +20,8 @@ router.post('/login', (req, res) => {
             res.status(Codes.UNAUTHORIZED).json({error: 'No matching credentials found'})
         } else {
             const jwtid = randomBytes(16).toString('hex')
-            const token = jwt.sign(employee.toObject(), 'superSecretDevToken', { expiresIn: '1h', jwtid })
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const token = jwt.sign(employee.toObject(), process.env.JWT_SIGN_SECRET!, { expiresIn: '1h', jwtid })
             res.cookie('token', token, { httpOnly: true })
             res.json({ authorized: employee })
         }

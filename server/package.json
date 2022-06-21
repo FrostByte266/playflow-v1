@@ -5,9 +5,9 @@
   "main": "main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env DB=techtool PORT=3000 nodemon",
+    "start": "cross-env DB=techtool NODE_ENV=production node build/backend/main.js",
     "dev": "cross-env DB=techtool nodemon",
-    "build": "tsc && mv build/backend/index.js build/backend/index.cjs",
+    "build": "tsc",
     "db:seed": "cross-env DB=techtool ts-node db/seed.ts",
     "db:seed:fresh": "cross-env DB=techtool ts-node db/seed.ts --reset"
   },

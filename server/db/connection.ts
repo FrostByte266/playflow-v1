@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 const DB = process.env.DB || 'test'
 
-const conString = `mongodb://localhost:27017/${DB}`
+
+const conString =  process.env.CONSTRING || `mongodb://localhost:27017/${DB}`
 
 mongoose.connect(conString)
 

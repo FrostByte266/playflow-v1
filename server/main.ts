@@ -23,7 +23,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(expressjwt({
-    secret: 'superSecretDevToken',
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    secret: process.env.JWT_SIGN_SECRET!,
     algorithms: ['HS256'],
     isRevoked(req, token) {
         return new Promise((resolve, reject) => {
@@ -63,6 +64,6 @@ app.use('/tap', tapRouter)
 app.use('/auth', authRouter)
 
 // Launch app
-app.listen(3100, () => {
+app.listen(process.env.PORT || 3100, () => {
     console.log('Locked and loaded!')
 })
