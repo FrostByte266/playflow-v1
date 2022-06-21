@@ -2,6 +2,22 @@
 ## By William Grigor
 ### Completed as part of General Assembly's Software Engineering Bootcamp
 
+## Live Site: https://playflow.herokuapp.com/login
+
+## Technologies:
+* SvelteKit
+* Express
+* MongoDB
+* TypeScript
+* PostCSS
+* PNPM
+* Heroku
+
+## Future Goals
+The app is really poorly deployed, heroku didn't work as I was thinking it would, lead to a really messy deployment.
+There are also some unsolved bugs, such as the screen blanking out when signing in, but a reload fixes it.
+There were also a lot of features that were cut from the MVP because of time constraints.
+
 ## User Stories
 
 * As an employee, I want to be able to login using a PIN or my play pass
