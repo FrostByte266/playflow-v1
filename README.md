@@ -1,38 +1,35 @@
-# create-svelte
+# Playflow
+## By William Grigor
+### Completed as part of General Assembly's Software Engineering Bootcamp
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## User Stories
 
-## Creating a project
+* As an employee, I want to be able to login using a PIN or my play pass
+* As an employee, I want to be able to complete the AM and PM card taps (equipment evals) and track my progress to ensure I get them all
+* As a manager, I want to be able to manage my employee logins so all employees can login
+* As a technician, I want to be able to alter the status of issues so I can keep track of what needs work
+* As a technician, I want to be able to see all my issues in one clear, concise view, so I can organize my day
+* As a manager, I want the card tap times to be tracked and provide clear targets to hold employees accountable
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Wireframes
+#### User selection
+![User Selection](https://media.git.generalassemb.ly/user/42701/files/7fbe519a-45c2-4d7c-b50a-9f76d3b738d8)
 
-```bash
-# create a new project in the current directory
-npm init svelte
+#### User sign in
+![User Auth](https://media.git.generalassemb.ly/user/42701/files/0ae93573-17a7-48c7-beaa-a8b48291a6b0)
 
-# create a new project in my-app
-npm init svelte my-app
-```
+#### Main screen
+![Home Screen](https://media.git.generalassemb.ly/user/42701/files/bcea3baf-e066-4c62-8ca6-86da9673c8e2)
 
-## Developing
+#### Main screen with incomplete card tap
+![Home Screen (With incomplete card tap)](https://media.git.generalassemb.ly/user/42701/files/d1bf5059-c225-473e-95b2-3eebb7cedd09)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+#### Card tap screen
+![Card Tap](https://media.git.generalassemb.ly/user/42701/files/87c08610-9de7-450a-a3d3-ee2ff5825c02)
 
-```bash
-npm run dev
+####Card tap issue entry popup
+![Card Tap Issue Entry](https://media.git.generalassemb.ly/user/42701/files/59be6965-cac9-4ed5-93f7-ea274cdac9e9)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+#### Issues view
+![Issue Review](https://media.git.generalassemb.ly/user/42701/files/b1f026b9-69be-456a-8848-0bffbd0c4269)
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
