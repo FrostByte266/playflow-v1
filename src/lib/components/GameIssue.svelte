@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { createEventDispatcher } from 'svelte'
     import type { IGameIssue } from '$lib/types/game'
     import { Status } from '$lib/types/enums/issue'
     import toggleable from '$lib/utils/toggleStore'
     import { session } from '$app/stores'
     import apiRoute, { defaultFetchProps } from '$lib/utils/apiRoute'
 
+    const dispatch = createEventDispatcher()
 
     export let issue: IGameIssue
 
@@ -37,6 +39,11 @@
     function cancelEdit() {
         issue = { ...originalIssue }
         editing.toggle()
+    }
+
+    function deleteIssue(e: MouseEvent) {
+        e.preventDefault()
+        dispatch('delete', issue)
     }
 
     async function markResolved(e: MouseEvent) {
@@ -99,7 +106,7 @@
                         <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                     </svg>
                 </a>
-                <a href="/issue" title="Delete Issue">
+                <a on:click={deleteIssue} href="_blank" title="Delete Issue">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                     </svg>

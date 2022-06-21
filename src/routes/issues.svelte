@@ -41,7 +41,13 @@
         day: 'numeric'
     })
 
-    console.log('issues are', issues)
+    async function deleteIssue(e: CustomEvent<IGameIssue>) {
+        await fetch(apiRoute(`/games/${e.detail.game._id}/issues/${e.detail._id}`), {
+            method: 'DELETE',
+            ...defaultFetchProps
+        })
+        issues[e.detail.game.name] = issues[e.detail.game.name].filter(i => i._id !== e.detail._id)
+    }
 
 </script>
 
@@ -59,6 +65,6 @@
 
 {#each Object.entries(issues) as [ game, gameIssues ]}
     {#each gameIssues as issue (issue._id)}
-        <GameIssue {issue} />
+        <GameIssue on:delete={deleteIssue} {issue} />
     {/each}
 {/each}
