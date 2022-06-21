@@ -11,6 +11,9 @@
             const gameRes = await fetch(apiRoute(`/games/${gameId}`), defaultFetchProps)
             const gameData = await gameRes.json()
             data[gameData.name] = data[gameId]
+            for(let i=0; i<data[gameData.name].length; i++) {
+                data[gameData.name][i].game = gameData
+            }
             delete data[gameId]
         }
 
@@ -56,6 +59,6 @@
 
 {#each Object.entries(issues) as [ game, gameIssues ]}
     {#each gameIssues as issue (issue._id)}
-        <GameIssue {game} {issue} />
+        <GameIssue {issue} />
     {/each}
 {/each}

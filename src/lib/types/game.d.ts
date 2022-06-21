@@ -11,6 +11,7 @@ export interface IGame {
 }
 
 export interface IGameIssue {
+    game: IGame,
     _id: string,
     description: string,
     reportedBy: IEmployee,

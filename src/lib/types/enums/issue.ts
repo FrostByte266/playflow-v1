@@ -7,5 +7,6 @@ export enum Type {
 export enum Status {
     REPORTED = 'Reported (Unconfirmed)',
     CONFIRMED = 'Confirmed',
-    AWAITING_RESOLUTION = 'Awaiting Resolution'
+    AWAITING_RESOLUTION = 'Awaiting Resolution',
+    RESOLVED = 'Issue Resolved'
 }
