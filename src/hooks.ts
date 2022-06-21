@@ -4,6 +4,7 @@ import type { IEmployee } from '$lib/types/employee'
 import jwtDecode from "jwt-decode"
 
 interface JWT extends IEmployee {
+    _id: string
     exp: number
 }
 
@@ -19,8 +20,8 @@ export const handle: Handle = async ({ event, resolve }) => {
         if(token.exp * 1000 < Date.now()) {
             throw new Error('Expired token')
         }
-        const { ID, name, role } = token
-        event.locals.user = { ID, name, role }
+        const { ID, name, role, _id } = token
+        event.locals.user = { ID, name, role, _id }
         return await resolve(event)
     } catch (e) {
         // If there are errors decoding the JWT, it has been altered by the client,

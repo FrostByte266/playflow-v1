@@ -7,7 +7,8 @@ declare namespace App {
 		user: {
 			name: string,
 			ID: number,
-			role: string
+			role: string,
+			_id: string
 		}
 	}
 	// interface Platform {}
@@ -15,7 +16,8 @@ declare namespace App {
 		user: {
 			name: string,
 			ID: number,
-			role: string
+			role: string,
+			_id: string
 		}
 	}
 	// interface Stuff {}

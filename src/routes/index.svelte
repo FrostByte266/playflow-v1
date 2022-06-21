@@ -2,7 +2,30 @@
     
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
 
+    import apiRoute, { defaultFetchProps } from '$lib/utils/apiRoute'
+
     import { session } from '$app/stores'
+    import { goto } from '$app/navigation'
+
+    async function startTap(e: MouseEvent) {
+        e.preventDefault()
+        const res = await fetch(apiRoute('/tap'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                date: new Date(),
+                time: "AM",
+                performedBy: $session.user._id,
+            }),
+            ...defaultFetchProps
+        })
+        const data = await res.json()
+
+        goto(`/gametap/${data.tap._id}/${data.firstGame._id}`)
+    }
+
 </script>
 
 <svelte:head>
@@ -18,7 +41,7 @@
 
 <div class="bg-gray-300 m-10 p-5">
     <h1 class="text-2xl">Daily Card Tap</h1>
-    <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="/gametap">Start A.M. Tap</a>
+    <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="_blank" on:click={startTap} >Start A.M. Tap</a>
     <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="/issues">Today's Issues</a>
 </div>
 <div class="bg-gray-300 m-10 p-5">

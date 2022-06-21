@@ -11,6 +11,7 @@ import tapRouter from './routers/gameTap'
 import authRouter from './routers/auth'
 
 import './db/connection'
+import 'dotenv/config'
 
 import type { Request, Response, NextFunction } from 'express'
 
@@ -39,7 +40,11 @@ app.use(expressjwt({
         })
     },
     getToken(req) {
-        return req.cookies.token || null
+        if (req.headers['x-internal-request'] === process.env.INTERNAL_REQUEST_KEY) {
+            return process.env.INTERNAL_TOKEN || null
+        } else {
+            return req.cookies.token || null
+        }
     }
 }).unless({ path: ['/auth/login', '/employees/preview']}))
 

@@ -50,6 +50,13 @@ router.route('/:id')
 router.route('/:tapId/:gameId')
     .post(async (req, res) => {
         const body: ITapUpdateBody = req.body
+        if(typeof body.new === 'undefined') {
+            body.new = []
+        }
+
+        if(typeof body.update === 'undefined') {
+            body.update = []
+        }
         const created = await Promise.all(
                 body.new.map<Promise<HydratedDocument<IGameIssue>>>(async newIssue => {
                 return await createIssue(req, req.params.gameId, newIssue)
