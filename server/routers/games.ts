@@ -8,6 +8,8 @@ import issuesRouter from './issues'
 
 const router = Router()
 
+router.use(issuesRouter)
+
 router.route('/')
     .post((req, res) => {
         Games.create(req.body)
@@ -48,6 +50,6 @@ router.get('/:id/next', (req, res) => {
     }))
 })
 
-router.use(issuesRouter)
+
 
 export default router

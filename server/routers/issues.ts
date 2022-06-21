@@ -4,10 +4,20 @@ import Codes from 'http-status-codes'
 import guardError from '../utils/guardError'
 
 import Games from '../db/models/game'
-import type { IGame } from '../db/types/game'
+import type { IGame, IGameIssue } from '../db/types/game'
+import type { Types } from 'mongoose'
 
 
 const router = Router()
+
+router.get('/issues', (req, res) => {
+    Games.find({}, 'issues', guardError<IGame>(res, {}, games => {
+        // TODO: Figure out how to type guardError to actually work with single values or arrays
+        const gamesArr = ((games as unknown) as Types.DocumentArray<IGame>)
+        const entries = gamesArr.map<[string, Types.DocumentArray<IGameIssue>]>(doc => [String(doc._id), doc.issues])
+        res.json(Object.fromEntries(entries))
+    }))
+})
 
 router.route('/:gameId/issues')
     .get((req, res) => {
