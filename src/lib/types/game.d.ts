@@ -11,10 +11,10 @@ export interface IGame {
 }
 
 export interface IGameIssue {
-    game: IGame,
+    _id: string,
     description: string,
     reportedBy: IEmployee,
-    date: Date,
+    date: string,
     type: Issue.Type,
     state: Issue.Status
 }

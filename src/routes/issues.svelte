@@ -1,9 +1,35 @@
+<script lang="ts" context="module">
+    import apiRoute, { defaultFetchProps } from '$lib/utils/apiRoute'
+
+    import type { Load } from './__types/issues'
+    import type { IGameIssue } from '$lib/types/game'
+
+    export const load: Load = async ({ fetch }) => {
+        const res = await fetch(apiRoute('/games/issues'), defaultFetchProps)
+        const data = await res.json()
+        for(const gameId of Object.keys(data)) {
+            const gameRes = await fetch(apiRoute(`/games/${gameId}`), defaultFetchProps)
+            const gameData = await gameRes.json()
+            data[gameData.name] = data[gameId]
+            delete data[gameId]
+        }
+
+        return {
+            props: {
+                issues: data
+            }
+        }
+
+    }
+</script>
+
 <script lang="ts">
     import GameIssue from '$lib/components/GameIssue.svelte'
     import EmployeeInfo from '$lib/components/EmployeeInfo.svelte'
-    import { gameIssues } from '$lib/stores/seedData'
 
     import { session } from '$app/stores'
+
+    export let issues: {[gameID: string]: Array<IGameIssue>}
 
     const today = new Date().toLocaleDateString('en-US', {
         weekday: 'long',
@@ -11,6 +37,9 @@
         month: 'long',
         day: 'numeric'
     })
+
+    console.log('issues are', issues)
+
 </script>
 
 <svelte:head>
@@ -25,6 +54,8 @@
     </div>
 </div>
 
-{#each $gameIssues as issue (issue.game.name)}
-    <GameIssue {issue} />
+{#each Object.entries(issues) as [ game, gameIssues ]}
+    {#each gameIssues as issue (issue._id)}
+        <GameIssue {game} {issue} />
+    {/each}
 {/each}

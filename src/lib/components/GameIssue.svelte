@@ -3,6 +3,7 @@
     import toggleable from '$lib/utils/toggleStore'
 
     export let issue: IGameIssue
+    export let game: string
 
 
     let originalIssue: IGameIssue = {...issue} // Making a copy incase user wants to revert
@@ -27,8 +28,8 @@
 
 <div class="my-2 mx-5 p-5 flex justify-between even:bg-gray-300 odd:bg-gray-400" >
     <div class="flex flex-col justify-center items-center">
-        <h1 class="text-lg">{issue.game.name}</h1>
-        <h1 class="text-lg">Reported on {issue.date.toLocaleDateString()}</h1>
+        <h1 class="text-lg">{game}</h1>
+        <h1 class="text-lg">Reported on {new Date(issue.date).toLocaleDateString()}</h1>
         <h1 class="text">By: {issue.reportedBy.name} ({String(issue.reportedBy.ID).padStart(9, '0')})</h1>
         <h1 class="text">{issue.reportedBy.role}</h1>
     </div>
