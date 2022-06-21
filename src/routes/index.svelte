@@ -41,8 +41,8 @@
 
 <div class="bg-gray-300 m-10 p-5">
     <h1 class="text-2xl">Daily Card Tap</h1>
-    <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="_blank" on:click={startTap} >Start A.M. Tap</a>
-    <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="/issues">Today's Issues</a>
+    <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="_blank" on:click={startTap}>Enter Flow</a>
+    <a class="bg-gray-500 p-10 text-white text-xl inline-block" href="/issues">Review Pending Issues</a>
 </div>
 <!-- <div class="bg-gray-300 m-10 p-5">
     <h1 class="text-2xl">Management</h1>
