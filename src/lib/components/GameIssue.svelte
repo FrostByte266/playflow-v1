@@ -13,11 +13,22 @@
 
     const editing = toggleable(false)
 
-    function toggleEdit() {
+    async function toggleEdit() {
         if ($editing) {
             // When the API is connected, this is where
             // the update request would be sent
             console.log('Finished editing')
+            const { description, state } = issue
+            const res = await fetch(apiRoute(`/games/${issue.game._id}/issues/${issue._id}`), { 
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    { description, state }
+                ),
+                ...defaultFetchProps
+            })
             originalIssue = {...issue}
         }
         editing.toggle()
